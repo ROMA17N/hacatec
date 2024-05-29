@@ -10,9 +10,9 @@
 }
 
 .comics {
-    width: 45%;
-    margin: 20%;
-    margin-top: -15%;
+    width: 30%;
+    margin: 7%;
+    margin-top: -5%;
 
 }
 
@@ -29,8 +29,12 @@
 /* Estilos específicos del cuerpo */
 body {
     /* Definición de una imagen de fondo con propiedades específicas */
-    background: url("https://static.vecteezy.com/system/resources/previews/000/732/668/non_2x/italian-food-background-photo.jpg");
-    background-size: cover;
+ /*   background: url("https://t3.ftcdn.net/jpg/07/17/19/58/360_F_717195849_sWv3HdvKddUIes5DG3VjIoMlKjkIAOXz.jpg");
+ */   background: url('../assets/2.jpg');
+  
+ /* background: url('https://oaxaca.eluniversal.com.mx/sites/default/files/styles/detalle_nota_1080x666_v22/public/2023/09/21/pueblos_magicos_oaxaca_.jpg?itok=bMee404A');
+*/
+  background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow: hidden;

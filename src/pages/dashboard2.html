@@ -20,13 +20,17 @@
 
 <body>
   <h1 class="titles">SERVICIOS LOCALES:</h1>
+
+  <form id="registrar">
+    <button type="submit" class="btn btn-warning" style="margin: 1%;">Registrar Servicio</button>
+  </form>
   <div class="form-container">
     <div class="container mt-5">
-      <h2>Registrar Servicio Turístico</h2>
+      <h2>Consultar Servicio Turístico</h2>
       <form id="serviceForm">
         <!-- Tipo de Servicio -->
         <div class="mb-3">
-          <label for="serviceType" class="form-label">Tipo de Servicio</label>
+          <label for="serviceType" class="form-label">Tipo de servicio:</label>
           <select class="form-select" id="idServiType" required>
             <option selected disabled value="">Selecciona un tipo de servicio</option>
             <option value="Tour">Tour</option>
@@ -36,6 +40,7 @@
             <!-- Puedes agregar más opciones aquí -->
           </select>
         </div>
+
         <div class="mb-3">
           <label for="Region" class="form-label">Region</label>
           <select class="form-select" id="idRegion" required>
@@ -51,56 +56,62 @@
 
           </select>
         </div>
-
-        <!-- Nombre del Servicio -->
-        <div class="mb-3">
-          <label for="serviceName" class="form-label">Nombre del Servicio</label>
-          <input type="text" class="form-control" id="idServicio" placeholder="Nombre del Servicio" required>
-        </div>
-
-        <!-- Horario -->
-        <div class="mb-3">
-          <label for="serviceTime" class="form-label">Horario</label>
-          <input type="text" class="form-control" id="idHorario" placeholder="Horario del Servicio" required>
-        </div>
-
-        <!-- Enlace a la Ubicación -->
-        <div class="mb-3">
-          <label for="locationLink" class="form-label">Enlace a la Ubicación</label>
-          <input type="url" class="form-control" id="idUbi" placeholder="https://maps.google.com/..." required>
-        </div>
-
-        <!-- Contacto -->
-        <div class="mb-3">
-          <label for="contactInfo" class="form-label">Contacto</label>
-          <input type="tel" class="form-control" id="idContacto" placeholder="Número de Teléfono o Email" required>
-        </div>
-
-        <!-- Precio -->
-        <div class="mb-3">
-          <label for="servicePrice" class="form-label">Precio</label>
-          <input type="number" class="form-control" id="idPrecio" placeholder="Precio del Servicio" required>
-        </div>
-
-        <!-- Descripción del Servicio -->
-        <div class="mb-3">
-          <label for="serviceDescription" class="form-label">Descripción del Servicio</label>
-          <textarea class="form-control" id="idDescripcion" rows="3" placeholder="Descripción del Servicio"></textarea>
-        </div>
-
         <!-- Botón de Registro -->
         <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Registrar Servicio</button>
+          <button type="submit" class="btn btn-primary">Consultar Servicio</button>
         </div>
       </form>
     </div>
   </div>
-
   <form id="regresar">
-    <button type="submit" class="btn btn-warning" style="margin-left: 90%;">Regresar</button>
+    <button type="submit" class="btn btn-warning" style="margin-left: 90%; margin-top: 7%;">regresar</button>
   </form>
+
+
+
+
+
+
+  <div id="serviceForm" style="display: none;">
+    <Form id="frmBuscar">
+      <label class="marge">
+        <label class="shadow-lg p-3 mb-5 bg-body rounded">
+          <label for="txtIdPersona">Id Persona:</label>
+          <input type="number" name="tftIdPersona" id="txtIdPersona" required>
+        </label> <button type="submit" id="btnBuscar" class="btn white-btn"> Buscar por Id</button>
+      </label>
+    </Form>
+  </div>
+  <div id='valoresTa' class="form" style="display: none;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" class="cuerpoT">Tipo de Servicio</th>
+          <th scope="col" class="cuerpoT">Region</th>
+          <th scope="col" class="cuerpoT">Servicio</th>
+          <th scope="col" class="cuerpoT">Horario</th>
+          <th scope="col" class="cuerpoT">Ubicacion</th>
+          <th scope="col" class="cuerpoT">Contacto</th>
+          <th scope="col" class="cuerpoT">Precio</th>
+          <th scope="col" class="cuerpoT">Descripciones</th>
+          <th scope="col" class="cuerpoT">Reservar</th>
+
+        </tr>
+      </thead>
+      <tbody id="cuerpoTa" class="cuerpoT">
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
   <!-- ----------------------------------------------------------------------------------------------------------- -->
-  <script src="../js/dashboard.js"> </script>
+  <script src="../js/dashboard2.js"> </script>
 
 
 

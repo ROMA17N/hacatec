@@ -13,15 +13,20 @@
 
 body {
   /* Definición de una imagen de fondo con propiedades específicas */
-  background: url("https://static.vecteezy.com/system/resources/previews/022/130/611/non_2x/hand-drawing-design-of-mexican-food-tacos-free-vector.jpg");
-  /*background: url("https://i.pinimg.com/736x/2a/96/ae/2a96aeef4e5845c52cc2ad25be57a658.jpg");
-    */
+  background: url("../assets/3.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   /* Impide el desplazamiento del fondo con el contenido */
 }
-
+.form-container {
+  background: rgba(255, 255, 255, 0.637);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
 
 /* ===================================================================================================================================*/
 #p1 {
@@ -182,3 +187,12 @@ body {
 .floater button:hover {
   background-color: #e65100;
 }
+
+
+
+
+
+
+
+
+

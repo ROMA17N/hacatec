@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- lang para el idioma de nuestra página -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Transacciones - TripingOax</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Icono de la página -->
+    <link rel="icon" href="../assets/Logo empresa.png">
+</head>
+<style>
+    body {
+        background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfQDvC_5niA9SpQI2tiFhmrrzAxHVHFw85ZgpjEevY-g&s");
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    header,
+    footer {
+        background-color: #6a1b9a;
+        /* Un tono púrpura más cálido */
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    h1,
+    h2 {
+        margin: 0.5rem 0;
+    }
+
+    .container {
+        margin-top: 2rem;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
+    .table th {
+        background-color: #ff6f61;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #ff6f61;
+        border-color: #ff6f61;
+    }
+
+    .btn-danger {
+        background-color: #d32f2f;
+        border-color: #d32f2f;
+    }
+
+    .btn-success:hover,
+    .btn-danger:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<body>
+    <header>
+        <h1>Gestión de Transacciones - TripingOax</h1>
+    </header>
+
+    <main class="container mt-5">
+        <section class="mb-5">
+            <h2>Registrar Transacción</h2>
+            <form id="transactionForm" class="mb-3">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción:</label>
+                    <input type="text" class="form-control" id="description" name="description" required>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Monto:</label>
+                    <input type="number" class="form-control" id="amount" name="amount" required>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Fecha:</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <button type="submit" class="btn btn-success">Registrar Transacción</button>
+                <button type="button" class="btn btn-primary" id="confirmPayment">Confirmar Pago</button>
+            </form>
+            <form id="regresar">
+                <button type="submit" class="btn btn-success">Regresar</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Lista de Transacciones</h2>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                    <!-- Las filas de transacciones se insertarán aquí -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Restaurante DeliTic's</p>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-cz6dA/X+YpU+nuLj+G3zocRvvFfiKdQ4Xqk5ZGzYj6QoWExLEs2+BRp0CVXjk4n1" crossorigin="anonymous">
+    </script>
+    <!-- jsPDF and jsPDF AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"
+        integrity="sha512-MvD2i7xXgPUGXe0Ufh4Fqv0uLJc/ow4bQziA54vDNe6xTPv0whmNl9p3kFAFTLt3aQW9vwZyB7cst9aF8xuNg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.getElementById('transactionForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const description = document.getElementById('description').value;
+            const amount = document.getElementById('amount').value;
+            const date = document.getElementById('date').value;
+
+            const tableBody = document.getElementById('transactionTableBody');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+        <td>${tableBody.rows.length + 1}</td>
+        <td>${description}</td>
+        <td>${amount}</td>
+        <td>${date}</td>
+        <td><button class="btn btn-danger" onclick="deleteRow(this)">Eliminar</button></td>
+    `;
+
+            tableBody.appendChild(row);
+
+            document.getElementById('transactionForm').reset();
+        });
+
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        document.getElementById('regresar').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del formulario
+            window.location.href = '../pages/dashboard2.html'; // URL a la que quieres redirigir
+        });
+
+        document.getElementById('confirmPayment').addEventListener('click', function () {
+            alert('Pago confirmado con éxito');
+        });
+
+        document.getElementById('exportPDF').addEventListener('click', function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text("Comprobante de Transacción", 10, 10);
+            doc.autoTable({
+                head: [['ID', 'Descripción', 'Monto', 'Fecha']],
+                body: Array.from(document.querySelectorAll('#transactionTableBody tr')).map(row => Array.from(row.cells).map(cell => cell.textContent))
+            });
+
+            doc.save('comprobante.pdf');
+        });
+    </script>
+</body>
+
+</html>
